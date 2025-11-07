@@ -2,9 +2,8 @@ package intializers
 
 import (
 	"log"
-	"os"
 
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -13,8 +12,9 @@ var DB *gorm.DB
 func ConnectToDB() {
 	// Database connection logic goes here
 	var err error
-	dsn := os.Getenv("DB_URL")
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	// refer https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
+	dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
+	DB, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Error connecting to database")
