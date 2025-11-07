@@ -75,3 +75,12 @@ func PostsUpdate(c *gin.Context) {
 		"post": post,
 	})
 }
+
+func PostsDelete(c *gin.Context) {
+	// Get id off url
+	id := c.Param("id")
+	// Delete post
+	intializers.DB.Delete(&models.Post{}, id)
+	// Return status
+	c.Status(200)
+}
