@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/ENISSAY39/go_project/controllers"
 	"github.com/ENISSAY39/go_project/intializers"
+	"github.com/ENISSAY39/go_project/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +23,8 @@ func main() {
 	router.PUT("/posts/:id", controllers.PostsUpdate)
 	router.DELETE("/posts/:id", controllers.PostsDelete)
 	router.POST("/signup", controllers.Signup)
+	router.POST("/login", controllers.Login)
+	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 
 	router.Run() // listens on 0.0.0.0:8080 by default
 }
