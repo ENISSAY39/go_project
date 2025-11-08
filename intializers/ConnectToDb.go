@@ -5,6 +5,7 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"github.com/ENISSAY39/go_project/models"
 )
 
 var DB *gorm.DB
@@ -19,5 +20,7 @@ func ConnectToDB() {
 	if err != nil {
 		log.Fatal("Error connecting to database")
 	}
-
+	log.Println("Connected to database successfully")
+	// Migrate the schema
+	DB.AutoMigrate(&models.User{})
 }

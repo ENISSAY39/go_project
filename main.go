@@ -21,6 +21,7 @@ func main() {
 	router.GET("/posts/:id", controllers.PostsShow)
 	router.PUT("/posts/:id", controllers.PostsUpdate)
 	router.DELETE("/posts/:id", controllers.PostsDelete)
+	router.POST("/signup", controllers.Signup)
 
 	router.Run() // listens on 0.0.0.0:8080 by default
 }
