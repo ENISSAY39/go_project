@@ -2,15 +2,15 @@ package main
 
 import (
 	"github.com/ENISSAY39/go_project/controllers"
-	"github.com/ENISSAY39/go_project/intializers"
+	"github.com/ENISSAY39/go_project/initializers"
 	"github.com/ENISSAY39/go_project/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func init() {
-	intializers.LoadEnvVariables()
-	intializers.ConnectToDB()
-	intializers.SyncDataBase()
+	initializers.LoadEnvVariables()
+	initializers.ConnectToDB()
+	initializers.SyncDataBase()
 
 }
 

@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/ENISSAY39/go_project/intializers"
+	"github.com/ENISSAY39/go_project/initializers"
 	"github.com/ENISSAY39/go_project/models"
 	"github.com/gin-gonic/gin"
 )
@@ -19,7 +19,7 @@ func PostsCreate(c *gin.Context) {
 
 	// Create post
 	post := models.Post{Title: body.Title, Body: body.Body}
-	result := intializers.DB.Create(&post) // pass pointer of data to Create
+	result := initializers.DB.Create(&post) // pass pointer of data to Create
 
 	if result.Error != nil {
 		c.Status(400)
@@ -36,7 +36,7 @@ func PostsCreate(c *gin.Context) {
 func PostsIndex(c *gin.Context) {
 	// Get posts
 	var posts []models.Post
-	intializers.DB.Find(&posts)
+	initializers.DB.Find(&posts)
 	// Return posts
 	c.JSON(200, gin.H{
 		"posts": posts,
@@ -48,7 +48,7 @@ func PostsShow(c *gin.Context) {
 	id := c.Param("id")
 	// Get post
 	var post models.Post
-	intializers.DB.First(&post, id)
+	initializers.DB.First(&post, id)
 	// Return post
 	c.JSON(200, gin.H{
 		"post": post,
@@ -67,9 +67,9 @@ func PostsUpdate(c *gin.Context) {
 	c.Bind(&body)
 	// Find post were updating
 	var post models.Post
-	intializers.DB.First(&post, id)
+	initializers.DB.First(&post, id)
 	// Update it
-	intializers.DB.Model(&post).Updates(models.Post{Title: body.Title, Body: body.Body})
+	initializers.DB.Model(&post).Updates(models.Post{Title: body.Title, Body: body.Body})
 	// Return it
 	c.JSON(200, gin.H{
 		"post": post,
@@ -80,7 +80,7 @@ func PostsDelete(c *gin.Context) {
 	// Get id off url
 	id := c.Param("id")
 	// Delete post
-	intializers.DB.Delete(&models.Post{}, id)
+	initializers.DB.Delete(&models.Post{}, id)
 	// Return status
 	c.Status(200)
 }

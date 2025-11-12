@@ -6,7 +6,7 @@ import (
 
 	"time"
 
-	"github.com/ENISSAY39/go_project/intializers"
+	"github.com/ENISSAY39/go_project/initializers"
 	"github.com/ENISSAY39/go_project/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
@@ -38,7 +38,7 @@ func Signup(c *gin.Context) {
 	}
 	// create the user
 	user := models.User{Email: body.Email, Password: string(hash)}
-	result := intializers.DB.Create(&user)
+	result := initializers.DB.Create(&user)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -63,7 +63,7 @@ func Login (c *gin.Context) {
 	}
 	// Look up requested user
 	var user models.User
-	intializers.DB.First(&user, "email = ?", body.Email)
+	initializers.DB.First(&user, "email = ?", body.Email)
 	if user.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid email or password",
@@ -137,7 +137,7 @@ func Validate (c *gin.Context) {
 
 		// Find the user with the id from the token sub claim
 		var user models.User
-		intializers.DB.First(&user, claims["sub"])
+		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}

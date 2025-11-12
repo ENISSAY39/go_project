@@ -1,17 +1,17 @@
 package main
 
 import (
-	"github.com/ENISSAY39/go_project/intializers"
+	"github.com/ENISSAY39/go_project/initializers"
 	"github.com/ENISSAY39/go_project/models"
 )
 
 func init() {
-	intializers.LoadEnvVariables()
-	intializers.ConnectToDB()
+	initializers.LoadEnvVariables()
+	initializers.ConnectToDB()
 
 }
 
 func main() {
-	intializers.DB.AutoMigrate(&models.Post{})
+	initializers.DB.AutoMigrate(&models.Post{})
 
 }
